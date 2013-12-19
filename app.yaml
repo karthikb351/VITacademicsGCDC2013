@@ -18,6 +18,11 @@ handlers:
   mime_type: text/javascript
   static_files: static/\1
   upload: static/(.*\.js)
+
+- url: /(.*\.bmp)
+  mime_type: image/bitmap
+  static_files: static/\1
+  upload: static/(.*\.bmp)
   
 - url: /favicon\.ico
   static_files: favicon.ico

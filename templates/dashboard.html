@@ -42,9 +42,10 @@
           <a class="brand" href="#">VITacademics</a>
           <div class="nav-collapse collapse">
               {% if loggedIn %}
+              <a href="{{ logout_url }}" class="btn btn-small btn-primary pull-right">Sign out</a>
             <p class="navbar-text pull-right">
-              Logged in as {{ name }} - <a href="{{ logout_url }}" class="navbar-link">Sign out</a>
-            </p>
+              Logged in as {{ name }} -
+            </p> 
               {% else %}
             <p class="navbar-text pull-right">
               <a href="{{ login_url }}" class="navbar-link">Sign in</a>
@@ -62,6 +63,7 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
+        
         <div class="span3">
           <div class="sidebar-nav">
             <ul class="nav nav-list">

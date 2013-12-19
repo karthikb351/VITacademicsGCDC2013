@@ -42,12 +42,11 @@
           <a class="brand" href="#">VITacademics</a>
           <div class="nav-collapse collapse">
             <div class="pull-right">
-                <div><a href="{{ login_url }}" class="btn btn-small btn-primary">Sign in</a></div>
+                <div><a href="{{ logout_url }}" class="btn btn-small btn-primary">Sign out</a></div>
             </div>
-            <p class="navbar-text pull-right" style="padding-right:5px">Sign in to actually do something </p>
+            <p class="navbar-text pull-right" style="padding-right:5px">Logged in as {{ name }} - </p>
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li class="navbar-text">Maybe this should be a one pager. An overview?</li>
+              <li class="active"><a href="#">Verification</a></li>
             </ul>
             
           </div><!--/.nav-collapse -->
@@ -59,16 +58,47 @@
       <div class="row-fluid">
         <div class="span8 offset2">
           <div class="hero-unit">
-              {% if error %}
-                <h1>Oops!</h1>
-                <p>{{ message }}</p>
-                <p><a href="{{ logout_url }}" class="btn btn-primary btn-large">Sign out</a></p>
-              {% else %}
-                <h1>Welcome!</h1>
-                <p>Lots of random info to go here. Like lots and lots, because this takes up so much space.</p>
-                <p>You'll need to sign in to actually see stuff.</p>
-                <p><a href="{{ login_url }}" class="btn btn-primary btn-large">Sign in</a></p>
-              {% endif %}
+                <h2>Not so fast {{ name }}!</h2>
+                <p>We still need to verify your registration number.</p>
+                <!-- Button to trigger modal -->
+                <a href="#myModal" role="button" class="btn btn-primary btn-large" data-toggle="modal"><strong>Verify</strong></a>
+                 
+                <!-- Modal -->
+                <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">Please fill out the form below</h3>
+                  </div>
+                  <div class="modal-body">
+                    <form class="form-horizontal" action="/linkregnosubmit" method="get">
+                        <fieldset>
+                        <!-- Prepended text-->
+                        <div class="control-group">
+                          <label class="control-label" for="prependedtext">Registration Number</label>
+                          <div class="controls">
+                            <div class="input-prepend">
+                              <span class="add-on"><img style="margin-top:-2px;" src="assets/captcha.bmp"></span>
+                              <input id="captcha" name="catpcha" class="input-large" placeholder="Eg. 2D4JME" type="text" required="">
+                            </div>
+                            
+                          </div>
+                        </div>
+                        
+                        <!-- Button -->
+                        <div class="control-group">
+                          <label class="control-label" for="singlebutton"></label>
+                          <div class="controls">
+                            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Verify</button>
+                          </div>
+                        </div>
+                        </fieldset>
+                    </form>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                  </div>
+                </div>
           </div>
         </div><!--/span-->
       </div><!--/row-->
