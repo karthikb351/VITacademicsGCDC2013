@@ -12,5 +12,5 @@ GOOGLE_APP_SECRET = 'tEQCCsNI0PcLlwIHkdv4pAbc'
 AUTH_CONFIG = {
 # OAuth 2.0 providers
 'google': (GOOGLE_APP_ID, GOOGLE_APP_SECRET,
-'https://www.googleapis.com/auth/userinfo.profile')
+'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email')
 }

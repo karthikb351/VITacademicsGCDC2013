@@ -129,15 +129,18 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
     """
         auth_id = '%s:%s' % (provider, data['id'])
         logging.info('Looking for a user with id %s', auth_id)
-
         user = self.auth.store.user_model.get_by_auth_id(auth_id)
         _attrs = self._to_user_model_attrs(data, self.USER_ATTRS[provider])
-
-        if re.search("\**@vit\.ac\.in", )
-        _attrs.update(
-
-        )
-
+        _attrs.update({
+                'email': data['email'],
+                'valid': False,
+                'registration_number': None
+            })
+        if re.search("\**@vit\.ac\.in", data['email']):
+            _attrs.update({
+                'valid': True,
+                'registration_number': data['family_name']
+            })
         if user:
             logging.info('Found existing user to log in')
             # Existing users might've changed their profile data so we update our
@@ -179,7 +182,7 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
         self.session.add_flash(auth_info, 'auth_info - from _on_signin(...)')
 
         # Go to the profile page
-        self.redirect('/profile')
+        self.redirect('/dashboard')
 
     def logout(self):
         self.auth.unset_session()
@@ -215,11 +218,13 @@ class RootHandler(BaseRequestHandler):
 class DashboardHandler(BaseRequestHandler):
     def get(self):
         """Handles GET /dashboard"""
-        if self.logged_in and self.verified:
+        if self.logged_in:
+            user=self.current_user
             values={
-                'user':self.current_user,
-                'session':self.auth.get_user_by_session(),
-            }
+                    'user':user,
+                    'session':self.auth.get_user_by_session(),
+                    'data':user.to_dict()
+                }
             self.render('profile.html',values)
         else:
             self.redirect('/')

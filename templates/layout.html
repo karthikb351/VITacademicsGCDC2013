@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Bootplus</title>
+  <title>VITacademics</title>
   <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,10 +40,17 @@
             </button>
             <a class="brand" href="#">VITacademics</a>
             <div class="nav-collapse collapse">
-              <div class="pull-right">
-                <div><a href="{{ logout_url }}" class="btn btn-small btn-primary">Sign out</a></div>
-              </div>
-              <p class="navbar-text pull-right" style="padding-right:5px">Logged in as {{ name }} - </p>
+              {% if logged_in %}
+                <div class="pull-right">
+                  <div><a href="{{ logout_url }}" class="btn btn-small btn-primary">Sign out</a></div>
+                </div>
+                <p class="navbar-text pull-right" style="padding-right:5px">Logged in as {{ user.name }} - </p>
+              {% else %}
+                <div class="pull-right">
+                  <div><a href="/auth" class="btn btn-small btn-primary">Sign in</a></div>
+                </div>
+                <p class="navbar-text pull-right" style="padding-right:5px">You aren't logged in - </p>
+              {% endif %}
               <ul class="nav">
                 <li class="active"><a href="#">Verification</a></li>
               </ul>
@@ -54,31 +61,4 @@
       </div>
 
       <div class="container-fluid"> <!-- Main Container -->
-
-        {% block main %}{% endblock %}
-
-        <hr>
-        <footer>
-          <p>&copy; CollegeCODE 2013</p>
-        </footer>
-
-      </div><!--/.fluid-container-->
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
-
-  </body>
-  </html>
+        {% block main %}{% endblock %}{% block footer %}{% endblock %}
