@@ -22,9 +22,8 @@ app_config = {
     
 # Map URLs to handlers
 routes = [
-  Route('/', handler='handlers.RootHandler'),  
+  Route('/', handler='handlers.RootHandler', name='root'),
   Route('/dashboard', handler='handlers.DashboardHandler', name='profile'),
-  
   Route('/logout', handler='handlers.AuthHandler:logout', name='logout'),
   Route('/auth/<provider>',
     handler='handlers.AuthHandler:_simple_auth', name='auth_login'),

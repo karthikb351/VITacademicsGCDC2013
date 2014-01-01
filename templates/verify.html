@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block main %}
+    <form class="form-horizontal">
+    <fieldset>
+
+    <!-- Form Name -->
+    <legend>Form Name</legend>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Text Input</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
+        <p class="help-block">help</p>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Text Input</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
+        <p class="help-block">help</p>
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="control-group">
+      <label class="control-label" for="singlebutton">Single Button</label>
+      <div class="controls">
+        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}

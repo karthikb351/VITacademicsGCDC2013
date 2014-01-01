@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import logging
-import secrets
 import re
 
 import webapp2
 from webapp2_extras import auth, sessions, jinja2
 from jinja2.runtime import TemplateNotFound
+from google.appengine.ext import db
 
+import secrets
 from simpleauth import SimpleAuthHandler
 
 
@@ -134,11 +135,15 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
         _attrs.update({
                 'email': data['email'],
                 'valid': False,
+                'verified': False,
                 'registration_number': None
             })
         if re.search("\**@vit\.ac\.in", data['email']):
             _attrs.update({
-                'valid': True,
+                'valid': True
+            })
+        if re.search("[0-9]{2}[A-Z|a-z]{3}[0-9]{3,4}",data['family_name']):
+            _attrs.update({
                 'registration_number': data['family_name']
             })
         if user:
@@ -212,7 +217,11 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
 class RootHandler(BaseRequestHandler):
     def get(self):
         """Handles default landing page"""
-        self.render('home.html')
+        error=self.request.get('error')
+        values={
+            'error': error
+        }
+        self.render('home.html',values)
 
 
 class DashboardHandler(BaseRequestHandler):
@@ -220,8 +229,18 @@ class DashboardHandler(BaseRequestHandler):
         """Handles GET /dashboard"""
         if self.logged_in:
             user=self.current_user
+            if not user.valid:
+                logging.info('Unsetting user and deleting')
+                self.auth.unset_session()
+                db.delete(user.key())
+                #user.delete_auth_token(user.auth_id,self.auth.models.UserToken(user))
+                self.redirect('/?error=NotAnAccount')
+                return
+            '''if not user.verified:
+                self.redirect('/verify')
+                return'''
             values={
-                    'user':user,
+                    'user': user,
                     'session':self.auth.get_user_by_session(),
                     'data':user.to_dict()
                 }
@@ -229,3 +248,30 @@ class DashboardHandler(BaseRequestHandler):
         else:
             self.redirect('/')
 
+class VerifyHandler(BaseRequestHandler):
+    def get(self):
+        """Handles GET /verify"""
+        invalid_cred = self.request.self('error')
+        if self.logged_in:
+            user=self.current_user
+            values={
+                'error':invalid_cred,
+                'user':user,
+                'session':self.auth.get_user_by_session(),
+                'data':user.to_dict()
+                }
+            self.render('verify.html',values)
+        else:
+            self.redirect('/')
+    def post(self):
+        """Handles POST /verify"""
+        if self.logged_in:
+            post_regno = self.redirect.get('regno')
+            post_dob = self.redirect.get('dob')
+            if re.search("[0-9]{2}[A-Z|a-z]{3}[0-9]{3,4}",post_regno):
+                #verify regno and dob here using post_regno and post_dob
+                self.redirect()
+            else:
+                self.redirect('/verify?error=InvalidCred')
+        else:
+            self.redirect('/')
