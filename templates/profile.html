@@ -1,9 +1,0 @@
-{% extends "layout.html" %}
-{% block main %}
-    {% if user.valid %}
-        <h2>Valid User</h2>
-    {% else %}
-        <h2>Invalid User</h2>
-    {% endif %}
-{% endblock %}
-{% block footer %}{% include "footer.html" %}{% endblock %}

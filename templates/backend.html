@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block main %}
+<div class="span6">
+    <div class="card">
+        <h3 class="card-heading simple">VITacademics Backend</h3>
+        <div class="card-body">
+            <style type="text/css">
+                code {
+                    font-size: 15px;
+                }
+            </style>
+            <p class="lead"><strong>VITacademics</strong> is an app for <strong>managing academics</strong> in the <strong>Vellore Institute of Technology, Vellore</stong> as well as <strong>Chennai</strong> campus.
+            </p>
+            <p class="lead"> This is our backend, and it runs here on <code>Google App engine</code>, acting as a custom built <code>API</code> for our client applications on <code>Android</code>, <code>iOS</code>, <code>Windows Phone</code> and even a <code>Webapp.</code> </p>
+            <p class="lead">
+              Our backend application extracts data from the official <a target="_blank" href="https://academics.vit.ac.in/parent/parent_login.asp"> university website</a>.
+
+              <br/><br/>
+
+              Also, having <code>one backend</code> for all our client platforms helps us do the data extraction in a single language (<code>Python</code>, in this case) instead of writing the same code in <code>multiple</code> languages <code>(Objective-C, Java, C#, Javascript)</code> in each of the platforms.
+
+            </p>
+            <legend>API reference:</legend>
+            <p class="lead">
+              <ul class="lead">
+                <li> <code> /captcha/(regno)</code>: Returns the bitmap of the captcha image </li>
+                <li> <code> /captchasub/(regno)/(dateOfBirth)/(captcha)</code>: Submits and logs into academics with the given credentials </li>
+                <li> <code> /attj/(regno)/(dateOfBirth)</code>: Returns the Attendance in JSON format </li>
+                <li> <code> /marks/(regno)/(dateOfBirth)</code>: Returns the Marks in JSON format </li>
+              </ul>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="span6">
+    <div class="card">
+        <h3 class="card-heading simple">The Future</h3>
+        <div class="card-body">
+            <p class="lead">This service has been designed such that a host of other services can be built on top of it. Some of the ideas we are exploring are:
+                <ul class="lead">
+                    <li>Allow the college/faculty to send notices to the student's mobile device directly. Either via SMS or an App Notification</li>
+                    <li>We look to build an event platform on top of this, allowing for a centralised portal for all the events that take place around college. Registration and immediate feedback from a cell phone would be very handy.</li>
+                    <li>A service to help find other students who are travelling so as to allow sharing of cabs/autos to save money.</li>
+                    <li>Most importantly, we could potentially provide a public API to allow other student developers to leverage our platform and make their own services on top of it. The possibilities are limitless.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}

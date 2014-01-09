@@ -3,10 +3,10 @@
 
 # Replace 'your-app-id-goes-here' with your application ID.
 # Get it here if you don't have one: https://appengine.google.com/
-application: vitgcdctest
+application: gcdc2013-vitacademics
 
 # App version
-version: use-version-arg
+version: 5
 
 # Use Python 2.7 runtime here.
 # See this for more info: 
@@ -67,7 +67,6 @@ handlers:
 
 # static content handlers  
 - url: /(favicon\.ico)
-  mime_type: image/png
   static_files: static/\1
   upload: static/favicon\.ico
 
@@ -84,6 +83,15 @@ handlers:
   mime_type: text/javascript
   static_files: static/\1
   upload: static/(.*\.js)
+
+- url: /(.*\.png)
+  mime_type: image/png
+  static_files: static/\1
+  upload: static/(.*\.png)
+
+- url: /(.*\.ico)
+  static_files: static/\1
+  upload: static/(.*\.ico)
 
 - url: /(.*\.bmp)
   mime_type: image/bitmap

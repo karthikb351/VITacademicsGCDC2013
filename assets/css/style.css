@@ -13,3 +13,9 @@ body {
           padding-right: 5px;
         }
       }
+div .subjectcard:hover {
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+
+}

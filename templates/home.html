@@ -1,19 +1,78 @@
 {% extends "layout.html" %}
 
 {% block main %}
-    {% if error %}
-        <p>{{ error }} : Log in with an @vit.ac.in ID.</p>
-        <p>
-        <a href="/auth/google" class="btn">Login</a>
-    {% else %}
-          {% if logged_in %}
-            <p>Hey there. Looks like you're logged in already.</p>
-            <a href="{{ url_for('profile') }}" class="btn">my profile</a>
-            <a href="/logout" class="btn">logout</a>
-          {% else %}
-            <p>You haven't logged in!</p>
-            <p>
-              <a href="/auth/google" class="btn">Login</a>
-          {% endif %}
+    </div>
+    <style type="text/css">
+      body {
+        padding-top: 46px;
+        padding-bottom: 40px;
+      }
+       .hero-unit {
+          background: #00001C;
+       }
+       .hero-unit h1 {color: #FFF}
+       .hero-unit p {color: #F5F5F5}
+      </style>
+    <div class="hero-unit">
+         <div class="container">
+            <h1>VITacademics</h1>
+            <p>It is a service for students in India manage their academics in college. It helps them keep track of their classes and stay updated on class notices, attendance and marks.</p>
+            <p>Currently the service is being tested in VIT University, but can potentially be extended to others.</p>
+            <p>We've highlighted some of the new features we've implemented based on the feedback we've recieved over the past month.</p>
+            <p>The older version we submitted for Round 1 is still available for reference <a href="http://1.gcdc2013-vitacademics.appspot.com">here</a>.</p>
+         </div>
+      </div>
+      <div class="container">
+
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+
+            <div class="card">
+               <h3 class="card-heading simple">Full fledged web application</h3>
+               <div class="card-body">
+                  <p>Originally, we used Google App Engine as just a backend server to power our client apps on Android, iOS and Windows Phone.
+                  </p>
+                   <p>Now, we built the same experience on the web with a responsive design so students can use the app without having to download it.
+                  </p>
+
+               </div>
+            </div>
+
+        </div>
+        <div class="span4">
+            <div class="card">
+               <h3 class="card-heading simple">Google Signin</h3>
+               <div class="card-body">
+                  <p>We noticed that a lot of institutions use Google Apps for Education to give email IDs to their students, so we adopted Google's OAuth2.0 functionality to provide an easy and secure authentication system for students.
+                   <p>In this way, we can better verify who the student really is, while allowing a single signin across all our platforms.</p>
+                  <p>
+               </div>
+            </div>
+
+       </div>
+        <div class="span4">
+
+            <div class="card">
+               <h3 class="card-heading simple">SMS Support</h3>
+               <div class="card-body">
+                  <p>We added SMS functionality so students without a smartphone can use it too. You can now SMS @vitacademics to query information and recieve updates.</p>
+                   <p>Once you've logged in you can check out our SMS demo <a href="/sms">here</a>.
+                  <p>
+               </div>
+            </div>
+
+        </div>
+      </div>
+    {% if not logged_in %}
+    <div class="hero-unit">
+         <div class="container">
+            <p>Sign in with your demo Google account and we will assign you a demo student profile to test our service.</p>
+            <p><a href="/auth/google" class="btn btn-primary btn-large">Sign in &raquo;</a></p>
+         </div>
+      </div>
     {% endif %}
+
 {% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}

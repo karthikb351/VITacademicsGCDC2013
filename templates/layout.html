@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    <link rel="shortcut icon" href="../assets/favicon.ico">
 </head>
 
 <body>
@@ -34,31 +34,50 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="#">VITacademics</a>
-                <div class="nav-collapse collapse">
+                <a class="brand" href="/"><img src="../assets/logo.png">VITacademics</a>
+                <div class="nav-collapse collapse" style="padding-top: 14px;">
                     {% if logged_in and user%}
                     <div class="pull-right">
-                        <div><a href="{{ logout_url }}" class="btn btn-small btn-primary">Sign out</a>
+                        <div><a href="/logout" class="btn btn-small btn-primary">Sign out</a>
                         </div>
                     </div>
-                    <p class="navbar-text pull-right" style="padding-right:5px">Logged in as {{ user.name }} -</p>
+                    <p class="navbar-text pull-right" style="padding-right:5px">Logged in as {{ user.name }} - Demo Mode</p>
                     {% else %}
                     <div class="pull-right">
-                        <div><a href="/auth" class="btn btn-small btn-primary">Sign in</a>
+                        <div><a href="/auth/google" class="btn btn-small btn-primary">Sign in</a>
                         </div>
                     </div>
-                    <p class="navbar-text pull-ri
-                    ght" style="padding-right:5px">You aren't logged in -</p>
+                    <p class="navbar-text pull-right" style="padding-right:5px">You aren't logged in -</p>
                     {% endif %}
+                    {% if logged_in %}
                     <ul class="nav">
-                        <li class="active"><a href="#">Verification</a>
+                        <li class="active"><a href="/dashboard">Dashboard</a></li>
+                        <li class="dropdown active">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            {% for s in allsubjects %}
+                            <li><a href="/subject/{{ s.classnbr }}"><h5>{% if classnbr|default('something') == s.classnbr %}<strong>{% endif %}{{ s.title }}{% if classnbr|default('something') == s.classnbr %}</strong>{% endif %}</h5></a></li>
+                            {% endfor %}
+                          </ul>
+                        </li>
+                        <li class="active"><a href="/timetable">Timetable</a></li>
+                        <li><a href="/backend">How it works</a></li>
+                        <li><a href="/sms">SMS Demo</a></li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Client Apps <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            <li><a target="_blank" href="https://play.google.com/store/apps/details?id=com.karthikb351.vitinfo2">Android</a></li>
+                            <li><a target="_blank" href="https://itunes.apple.com/us/app/vitacademics/id727796987?mt=8">iOS</a></li>
+                            <li><a target="_blank" href="http://www.windowsphone.com/en-in/store/app/vitacademics/d6a9e028-4cc2-46ea-9f1b-84c02f4ae408">Windows Phone</a></li>
+                          </ul>
                         </li>
                     </ul>
+                    {% else %}
+                        <ul class="nav">
+                        <li class="active"><a href="">Welcome!</a></li>
+                        </ul>
+                    {% endif %}
+
 
                 </div>
                 <!--/.nav-collapse -->
@@ -66,6 +85,6 @@
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-top: 14px;">
         <!-- Main Container -->
         {% block main %}{% endblock %}{% block footer %}{% endblock %}
