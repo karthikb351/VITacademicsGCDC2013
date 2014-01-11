@@ -1,22 +1,14 @@
 {% extends "layout.html" %}
 {% block main %}
-    <div class="container">
-        <div class="row">
-            <div class="card">
-                <div class="card-heading image">
-                    <div class="card-heading-header">
-                        <h2>Demo account: {{ user.email }}</h2>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h4>This is where we would see if your email address matches one of our supported institutions and is linked to a student.</h4>
-                    <h4>Our semester has not yet started for this year, so for GCDC purposes, we are going to take data from the previous semester of student 11BCE0354.</h4>
-                    <a href="/dashboard" class="btn btn-primary">Go to dashboard</a>
-                    <p></p>
-                </div>
-            </div>
-        </div>
-    <div id="push"></div>
-    </div>
+    <div class="row" style="padding-top: 50px">
+		<div class="large-12 columns">
+			<h1> Demo account: {{ user.email }} </h1>
+			<h4 class="subheader">This is where we would see if your email address matches one of our supported institutions and figure out which student you are.</h4>
+            <h6>We are inbetween semesters at the moment, so for GCDC purposes, we are going to take <span data-tooltip class="has-tip" title="Don't worry though, he is one of the developers of this application :)">Kishore Narendran</span>'s data from the previous semester.</h6>
+            <a href="/dashboard" class="radius button">Go to dashboard</a>
+            <p></p>
+		</div>
+	</div>
+    <script src="../assets/js/foundation/foundation.tooltip.js"></script>
 {% endblock %}
 {% block footer %}{% include "footer.html" %}{% endblock %}

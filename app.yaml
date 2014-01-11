@@ -6,7 +6,7 @@
 application: gcdc2013-vitacademics
 
 # App version
-version: 5
+version: 4
 
 # Use Python 2.7 runtime here.
 # See this for more info: 

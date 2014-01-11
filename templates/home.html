@@ -1,78 +1,118 @@
 {% extends "layout.html" %}
 
 {% block main %}
-    </div>
     <style type="text/css">
-      body {
-        padding-top: 46px;
-        padding-bottom: 40px;
+      #map-canvas { height: 100% }
+      .mapContainer{
+          height: 250px;
+          width: 100%;
       }
-       .hero-unit {
-          background: #00001C;
-       }
-       .hero-unit h1 {color: #FFF}
-       .hero-unit p {color: #F5F5F5}
-      </style>
-    <div class="hero-unit">
-         <div class="container">
-            <h1>VITacademics</h1>
-            <p>It is a service for students in India manage their academics in college. It helps them keep track of their classes and stay updated on class notices, attendance and marks.</p>
-            <p>Currently the service is being tested in VIT University, but can potentially be extended to others.</p>
-            <p>We've highlighted some of the new features we've implemented based on the feedback we've recieved over the past month.</p>
+    </style>
+    <div class="mapContainer">
+		<div id="map-canvas"></div>
+	</div>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWTUOHUu17JwfFWQWnjxMWnaC3qZodlIU&sensor=false">
+    </script>
+    <script type="text/javascript">
+          function initialize() {
+            var mapOptions = {
+              center: new google.maps.LatLng(12.9717502, 79.1590148),
+              zoom: 18
+            };
+            var map = new google.maps.Map(document.getElementById("map-canvas"),
+                mapOptions);
+          }
+          google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+
+         $(document).foundation();
+
+         jQuery(function() {
+            jQuery({blurRadius: 0}).animate({blurRadius: 6}, {
+                duration: 2000,
+                easing: 'swing', // or "linear"
+                                 // use jQuery UI or Easing plugin for more options
+                step: function() {
+                    jQuery('#map-canvas').css({
+                        "-webkit-filter": "blur("+this.blurRadius+"px)",
+                        "filter": "blur("+this.blurRadius+"px)"
+                    });
+                }
+            }).promise().done(function(){
+                jQuery("#map-canvas").animate({
+                    height: 150
+                }, 1500, function(){
+
+                })
+            });
+        });
+    </script>
+    <div class="row">
+		<div class="large-12 columns">
+			<h1> Welcome to <strong> VIT</strong>academics </h1>
+			<h4 class="subheader">We are a service that helps students manage their academics in college.</h4>
+            <p>Students can look up their attendance, be notified of scores, manage their weekly schedule and receive updates regarding their classes.</p>
+            <p>We have mobile applications on Android, iOS and Windows Phone platforms that allow students to have access wherever they are.
+                <br>
+                <strong>Google App Engine</strong> is at the hub; managing the database, users and notifications as well as powering this website.
+                <br>
+                Currently the service is being tested in <strong>VIT University</strong>, but can potentially be extended to others.</p>
             <p>The older version we submitted for Round 1 is still available for reference <a href="http://1.gcdc2013-vitacademics.appspot.com">here</a>.</p>
-         </div>
-      </div>
-      <div class="container">
-
-
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="span4">
-
-            <div class="card">
-               <h3 class="card-heading simple">Full fledged web application</h3>
-               <div class="card-body">
-                  <p>Originally, we used Google App Engine as just a backend server to power our client apps on Android, iOS and Windows Phone.
-                  </p>
-                   <p>Now, we built the same experience on the web with a responsive design so students can use the app without having to download it.
-                  </p>
-
-               </div>
+		</div>
+        <hr>
+	</div>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="row">
+                <div class="large-4 columns">
+                    <div class="panel">
+                        <h4>Full fledged web application</h4>
+                        <br>
+                        <h6 class="subheader">Originally, we used Google App Engine as just a backend server to power our mobile apps on Android, iOS and Windows Phone.</h6>
+                        <h6 class="subheader">Now, we built the same experience on the web with a responsive design so students can use the app without having to download it.</h6>
+                    </div>
+                </div>
+                <div class="large-4 columns">
+                    <div class="panel">
+                        <h4>Google Sign in</h4>
+                        <br>
+                        <h6 class="subheader">We noticed that a lot of institutions use Google Apps for Education to give email IDs to their students, so we adopted Google's OAuth2.0 functionality to provide an easy and secure authentication system for students.</h6>
+                        <h6 class="subheader">In this way, we can better verify who the student really is, while allowing a single signin across all our platforms.</h6>
+                    </div>
+                </div>
+                <div class="large-4 columns">
+                    <div class="panel">
+                        <h4>SMS Support</h4>
+                        <br>
+                        <h6 class="subheader">We added SMS functionality so students without a smartphone can use it too. You can now SMS @vitacademics to query information and recieve updates.</h6>
+                        <h6 class="subheader">Once you've logged in you can check out our SMS demo <a href="/sms">here</a>.</h6>
+                    </div>
+                 </div>
             </div>
-
         </div>
-        <div class="span4">
-            <div class="card">
-               <h3 class="card-heading simple">Google Signin</h3>
-               <div class="card-body">
-                  <p>We noticed that a lot of institutions use Google Apps for Education to give email IDs to their students, so we adopted Google's OAuth2.0 functionality to provide an easy and secure authentication system for students.
-                   <p>In this way, we can better verify who the student really is, while allowing a single signin across all our platforms.</p>
-                  <p>
-               </div>
-            </div>
-
-       </div>
-        <div class="span4">
-
-            <div class="card">
-               <h3 class="card-heading simple">SMS Support</h3>
-               <div class="card-body">
-                  <p>We added SMS functionality so students without a smartphone can use it too. You can now SMS @vitacademics to query information and recieve updates.</p>
-                   <p>Once you've logged in you can check out our SMS demo <a href="/sms">here</a>.
-                  <p>
-               </div>
-            </div>
-
-        </div>
-      </div>
+    </div>
     {% if not logged_in %}
-    <div class="hero-unit">
-         <div class="container">
-            <p>Sign in with your demo Google account and we will assign you a demo student profile to test our service.</p>
-            <p><a href="/auth/google" class="btn btn-primary btn-large">Sign in &raquo;</a></p>
-         </div>
-      </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <hr>
+            <h2>Get Started</h2>
+            <div class="row">
+              <div class="large-9 columns">
+                <h4 class="subheader">We can't wait for you to try it out!</h4>
+                <p>Sign in with your Google account and we will assign you a demo student profile to test our service.</p>
+              </div>
+              <div class="large-3 columns">
+                <a href="/auth/google" class="radius button right">Sign in</a>
+              </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
+
 
 {% endblock %}
 {% block footer %}{% include "footer.html" %}{% endblock %}

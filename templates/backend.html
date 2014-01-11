@@ -1,23 +1,18 @@
 {% extends "layout.html" %}
 {% block main %}
-<div class="span6">
-    <div class="card">
-        <h3 class="card-heading simple">VITacademics Backend</h3>
-        <div class="card-body">
-            <style type="text/css">
-                code {
-                    font-size: 15px;
-                }
-            </style>
+<div class="row" style="padding-top: 50px;">
+    <div class="large-6 columns">
+        <div class="row">
+            <h2>The Backend</h2>
             <p class="lead"><strong>VITacademics</strong> is an app for <strong>managing academics</strong> in the <strong>Vellore Institute of Technology, Vellore</stong> as well as <strong>Chennai</strong> campus.
             </p>
-            <p class="lead"> This is our backend, and it runs here on <code>Google App engine</code>, acting as a custom built <code>API</code> for our client applications on <code>Android</code>, <code>iOS</code>, <code>Windows Phone</code> and even a <code>Webapp.</code> </p>
+            <p class="lead"> This is our backend, and it runs here on <code>Google App engine</code>, acting as a custom built <code>API</code> for our client applications on <code>Android</code>, <code>iOS</code>, <code>Windows Phone</code> and even this <code>Webapp.</code> </p>
             <p class="lead">
               Our backend application extracts data from the official <a target="_blank" href="https://academics.vit.ac.in/parent/parent_login.asp"> university website</a>.
 
               <br/><br/>
 
-              Also, having <code>one backend</code> for all our client platforms helps us do the data extraction in a single language (<code>Python</code>, in this case) instead of writing the same code in <code>multiple</code> languages <code>(Objective-C, Java, C#, Javascript)</code> in each of the platforms.
+              Also, having <code>one backend</code> for all our client platforms helps us do the data management and processing in a single language (<code>Python</code>, in this case) instead of writing the same code in <code>multiple</code> languages <code>(Objective-C, Java, C#, Javascript)</code> in each of the platforms.
 
             </p>
             <legend>API reference:</legend>
@@ -29,13 +24,12 @@
                 <li> <code> /marks/(regno)/(dateOfBirth)</code>: Returns the Marks in JSON format </li>
               </ul>
             </p>
+            <p style="font-size: 13px">Base URL: <code>http://1.gcdc2013-vitacademics.appspot.com/</code></p>
         </div>
     </div>
-</div>
-<div class="span6">
-    <div class="card">
-        <h3 class="card-heading simple">The Future</h3>
-        <div class="card-body">
+    <div class="large-6 columns">
+        <div class="row">
+            <h2>Future Prospects</h2>
             <p class="lead">This service has been designed such that a host of other services can be built on top of it. Some of the ideas we are exploring are:
                 <ul class="lead">
                     <li>Allow the college/faculty to send notices to the student's mobile device directly. Either via SMS or an App Notification</li>
@@ -46,7 +40,6 @@
             </p>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}
 {% block footer %}{% include "footer.html" %}{% endblock %}

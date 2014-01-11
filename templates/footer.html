@@ -1,33 +1,25 @@
     {% if not disclaimerpage %}
-    <div class="card" style="padding-top: 12px;">
-       <div class="card-body" style="margin-top: 0px;">
-          <p><strong>*NOTE: All data provided isn't current. Please read <a href="/disclaimer">this</a>.</strong></p>
-       </div>
+    <div class="large-12 columns" style="padding-top: 12px;">
+        <div class="panel">
+          <p>*NOTE: All data provided isn't current. Please read <a href="/disclaimer">this</a>.</p>
+        </div>
     </div>
     {% endif %}
-    <div id="footer">
-      <div class="container">
-        <p class="muted credit">VITacademics developed for <a href="http://www.google.co.in/events/gcdc2013/">Google Cloud Developer Challenge 2013 </a> by Karthik Balakrishnan, Siddharth Gupta and Kishore Narendran.</p>
-      </div>
-    </div>
 
-    </div><!--/.fluid-container-->
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <footer>
+        <div class="large-12 columns">
+          <hr />
+              <h6>VITacademics developed for <a href="http://www.google.co.in/events/gcdc2013/">GCDC 2013</a>
+                  by Karthik Balakrishnan, Kishore Narendran and Siddharth Gupta of <a href="http://vit.ac.in">VIT University</a>.</h6>
+        </div>
+    </footer>
     <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
+    <script src="../assets/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
 
-   </body>
+      var doc = document.documentElement;
+      doc.setAttribute('data-useragent', navigator.userAgent);
+    </script>
+  </body>
 </html>

@@ -1,50 +1,38 @@
 {% extends "layout.html" %}
 {% block main %}
-<div class="row-fluid">
-    <div class="span9">
-        <div class="card">
-            <div class="card-heading image">
-                <div class="card-heading-header">
-                    <h1>{{ subject.title }}</h1>
-                </div>
-                <div class="row-fluid">
-                        <div class="span6 card-heading-header">
-                            <span><strong>COURSE CODE: </strong>{{ subject.code }}</span>
-                            </br>
-                            <span><strong>SLOT</strong>: {{ subject.slot }}</span>
-                        </div>
-                        <div class="span6 card-heading-header">
-                            <span><strong>TYPE</strong>: {{ subject.type }}</span>
-                            </br>
-                            <span><strong>REGISTRATION DATE</strong>: {{ subject.regdate }}</span>
-                        </div>
+<div class="row" style="padding-top: 50px;">
+    <div class="large-9 columns">
+        <div class="row">
+            <h1>{{ subject.title }}</h1>
+            <div class="row">
+                <div class="large-10 columns" style="padding-top: 22px">
+                    <div class="progress {% if (subject.percentage|replace("%","")) >= "80" %}success{% elif (subject.percentage|replace("%","")) >= "75" %}{% else %}alert{% endif %}">
+                      <span class="meter" style="width: {{ subject.percentage }}"></span>
                     </div>
-            </div>
-             <div class="card-body" style="margin-top: 0px;">
-             <div class="row-fluid">
-                <div class="span10" style="margin-top: 26px;">
-                     <div class="progress progress-{% if (subject.percentage|replace("%","")) >= 80 %}success{% elif (subject.percentage|replace("%","")) >= 75 %}warning{% else %}danger{% endif %}">
-                        <div class="bar" style="width: {{ subject.percentage }}"></div>
-                     </div>
                 </div>
-                <div class="span2">
+                <div class="large-2 columns">
                     <h1>{{ subject.percentage }}</h1>
                 </div>
-             </div>
-             <h4 style="margin-top: 0px;">You have attended <strong>{{ subject.attended }}</strong> out of <strong>{{ subject.conducted }} classes</strong></h4>
-             </div>
+            </div>
+            <div class="row">
+                <div class="large-4 columns">
+                    <h4>{{ subject.code }}</h4>
+                    <h4>{{ subject.slot }} Slot</h4>
+                </div>
+                <div class="large-8 columns">
+                    <h4>{{ subject.type }}</h4>
+                    <h4>Registered on {{ subject.regdate }}</h4>
+                </div>
+            </div>
+
+            <h6>You have attended <strong>{{ subject.attended }}</strong> out of <strong>{{ subject.conducted }}</strong> classes.</h6>
+        <hr>
         </div>
-        <div class="row-fluid">
-            <div class="span4">
-                <div class="card">
-                    <div class="card-heading image">
-                        <div class="card-heading-header">
-                            <h3>Course Schedule</h3>
-                            <span>Weekly schedule for {{ subject.title }}</span>
-                        </div>
-                    </div>
-                    <div class="card-body" style="height: 320px; overflow-y: auto;">
-                        <table class="table table-hover">
+        <div class="row">
+            <div class="large-4 columns">
+                <div>
+                    <h4>Course Schedule</h4>
+                    <table style="width: 100% ">
                             <thead>
                                 <tr>
                                     <th>Day</th>
@@ -84,19 +72,12 @@
                               {% endif %}
                           </tbody>
                       </table>
-                    </div>
                 </div>
             </div>
-            <div class="span4">
-                <div class="card">
-                    <div class="card-heading image">
-                        <div class="card-heading-header">
-                            <h3>Course Scores</h3>
-                            <span>Marks obtained in {{ subject.title }}</span>
-                        </div>
-                    </div>
-                    <div class="card-body" style="height: 320px; overflow-y: auto;">
-                        <table class="table table-hover">
+            <div class="large-4 columns">
+                <div>
+                    <h4>Course Scores</h4>
+                    <table style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Criteria</th>
@@ -111,21 +92,13 @@
                           </tr>
                           {% endfor %}
                           </tbody>
-                      </table>
-                    </div>
-
+                    </table>
                 </div>
             </div>
-            <div class="span4">
-                <div class="card">
-                    <div class="card-heading image">
-                              <div class="card-heading-header">
-                                 <h3>Attendance Details</h3>
-                                 <span><strong>Last Updated On: </strong>{{ subject.details[subject.details|length-2] }}</span>
-                              </div>
-                    </div>
-                    <div class="card-body" style="height: 320px; overflow-y: auto;">
-                    <table class="table table-hover">
+            <div class="large-4 columns">
+                <h4>Attendance Details</h4>
+                <div style="width:100%; display:block; max-height: 320px; overflow-y: auto;">
+                    <table style="width: 100%;">
                           <thead>
                             <tr>
                               <th>Date</th>
@@ -137,55 +110,46 @@
                             <tr>
                               <td>{{ detail[0] }}</td>
                               {% if detail[1] == "Absent" %}
-                                <td><span class="label label-important">{{ detail[1] }}</span></td>
+                                <td><span class="alert label">{{ detail[1] }}</span></td>
                               {% elif detail[1] == "Present" %}
-                                  <td><span class="label label-success">{{ detail[1] }}</span></td>
+                                  <td><span class="label success">{{ detail[1] }}</span></td>
                               {% else %}
-                                   <td><span class="label label-warning">{{ detail[1] }}</span></td>
+                                   <td><span class="label">{{ detail[1] }}</span></td>
                               {% endif %}
                             </tr>
                           {% endfor %}
                           </tbody>
                         </table>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="span3">
-        <div class="card">
-            <div class="card-heading image">
-                      <div class="card-heading-header">
-                         <h3>Notices</h3>
-                         <span>Recent updates</span>
-                      </div>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-striped">
-                      <tbody>
-                        {% for notice in notices %}
-                        <tr>
-                            <td>
-                                <h4><strong>{{ notice.text }}</strong></h4>
-                                {% if notice.author == "11BCE0354" %}
-                                <p onclick='location.href="/noticedel/{{ notice.id }}/{{ subject.classnbr }}"' style="cursor: pointer; float: right;">x</p>
-                                {% endif %}
-                                <p style="font-style: italic;">By {{ notice.author  }} at {{ notice.timestamp }}</p>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                      </tbody>
-                </table>
+    <div class="large-3 columns">
+        <h4>Notices</h4>
+        <table style="width: 100%">
+            {% for notice in notices %}
+            <tr>
+                <td>
+                    <h6>{{ notice.text }}{% if notice.author == "11BCE0354" %}<p onclick='location.href="/noticedel/{{ notice.id }}/{{ subject.classnbr }}"' style="cursor: pointer; float: right;">x</p>{% endif %}</h6>
+                    <p class="subheader" style="font-style: italic; font-size: 10px;">By {{ notice.author  }} at {{ notice.timestamp }}</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <form id="form1" class="input-prepend" action="/notice" onsubmit="setTimeout(function () { window.location.reload(); }, 10)" method="post">
+          <input type="hidden" name="cnum" value="{{ subject.classnbr }}">
+          <input type="hidden" name="author" value="11BCE0354">
+            <div class="row collapse">
+                <div class="small-9 columns">
+                  <input type="text" name="text" placeholder="Quiz on Monday!">
+                </div>
+                <div class="small-3 columns">
+                  <a href="#" onclick="document.forms[0].submit();" type="submit" class="button postfix">Post</a>
+                </div>
+                <p class="subheader" style="font-size: 10px;">Sometimes you need to reload the page after posting/deleting a notice.</p>
+             </div>
+        </form>
 
-                <form class="input-prepend" action="/notice" onsubmit="setTimeout(function () { window.location.reload(); }, 10)" method="post">
-                  <input class="span12" name="text" type="text" placeholder="Quiz on Monday!">
-                  <input type="hidden" name="cnum" value="{{ subject.classnbr }}">
-                  <input type="hidden" name="author" value="11BCE0354">
-                  <button type="submit" class="btn">Post</button>
-                </form>
-                <p class="muted">Sometimes you need to reload the page after posting/deleting a notice.</p>
-            </div>
-        </div>
     </div>
 </div>
 {% endblock %}

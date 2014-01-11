@@ -1,86 +1,70 @@
 {% extends "layout.html" %}
 {% block main %}
-    <style type="text/css">
-                code {
-                    font-size: 15px;
-                }
-            </style>
-    <div class="container">
+<div class="row" style="padding-top: 50px;">
+    <div class="large-6 columns">
         <div class="row">
-            <div class="span6">
-                <div class="card">
-                    <div class="card-heading image">
-                        <div class="card-heading-header">
-                            <h2>SMS Features</h2>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h4>Students without smartphones or internet plans can use VITacademics too.</h4>
-                        </br>
-                        <p class="lead">How it works</p>
-                        <ul>
-                            <li>When you log in the first time, we provide you with a randomly generated code. Similar to an OTP.</li>
-                            <li>The student verifies his mobile number by sending - <code>@vitacademics[space][OTP]</code> to <code>+91 92665 92665</code> </li>
-                            <li>We then bind his mobile number to his account and activate SMS functionality</li>
-                        </ul>
-                        </br>
-                        <p class="muted">Internet-SMS Powered by <a href="http://www.txtweb.com">txtWeb</a> </p>
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="card">
-                    <div class="card-heading image">
-                        <div class="card-heading-header">
-                            <h2>Mobile Simulator</h2>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <p>Incase you don't want to use your mobile, you can try test out the commands here, as if it was the mobile registered to student 11BCE0354.</p>
-                        <br>
-                        <div  class="well well-small">
-                          <p class="lead">Response:</p>
-                          <hr>
-                          <p id="smsreply">Try out a command</p>
-                        </div>
-                        <div class="input-prepend input-append">
-                          <span class="add-on">@vitacademics</span>
-                          <input class="span3" name="sms" id="sms" autocomplete="off" spellcheck="false" type="text" placeholder="Eg. attendance">
-                          <button id="submitbutton" class="btn" type="button">Send</button>
-                        </div>
-                        </br>
-                        <p class="lead">Usage</p>
-                        <ul>
-                            <li>Attendance Overview - <code>@vitacademics attendance</code></li>
-                            <li>Courses List - <code>@vitacademics courses</code></li>
-                            <li>Course Details - <code>@vitacademics course [course-number]</code></li>
-                            <li>Notices - <code>@vitacademics notices [course-number]</code></li>
-                            <li>Help - <code>@vitacademics help</code></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <h2>The Backend</h2>
+            <h4>Students without smartphones or internet plans can use VITacademics too.</h4>
+            </br>
+            <p class="lead">How it works</p>
+            <ul>
+                <li>When you log in the first time, we provide you with a randomly generated code. Similar to an OTP.</li>
+                <li>The student verifies his mobile number by sending - <code>@vitacademics[space][OTP]</code> to <code>+91 92665 92665</code> </li>
+                <li>We then bind his mobile number to his account so he can SMS queries without having to authenticate.</li>
+            </ul>
+            </br>
+            <p style="font-size: 10px">SMS Gateway powered by <a href="http://www.txtweb.com">txtWeb</a> </p>
         </div>
-    <script src="/assets/js/jquery.js"></script>
-    <script type="text/javascript">
-    var sub="init";
-    var dat="init";
-    var prog=$('#smsreply')
-      $('#submitbutton').on('click', function(e)
-      {
-        var txt=$('#sms').val();
-        console.log(txt);
-        prog.html('Sending SMS...');
-        $.get("/txtweb?txtweb-message="+encodeURIComponent(txt),
-            function(d) {
-                console.log(d)
-                prog.html(d);
-        });
-        e.preventDefault();
-
-      })
-    </script>
-    <div id="push"></div>
     </div>
+    <div class="large-6 columns">
+        <div class="row">
+            <h2>Mobile Simulator</h2>
+            <p>Incase you don't want to use your mobile, you can try test out the commands here, it mimics Kishore's phone.</p>
+            <br>
+            <div  class="well well-small">
+              <p class="lead">Response:</p>
+              <hr>
+              <p id="smsreply">Try out a command</p>
+            </div>
+            <div class="row collapse">
+                <div class="small-3 large-3 columns">
+                  <span class="prefix">@vitacademics</span>
+                </div>
+                <div class="small-7 large-7 columns">
+                  <input type="text" name="sms" id="sms" placeholder="Eg. attendance">
+                </div>
+                <div class="small-2 large-2 columns">
+                  <a href="#" id="submitbutton" class="button postfix">Send</a>
+                </div>
+            </div>
+            <ul>
+                <li>Attendance Overview - <code>@vitacademics attendance</code></li>
+                <li>Courses List - <code>@vitacademics courses</code></li>
+                <li>Course Details - <code>@vitacademics course [course-number]</code></li>
+                <li>Notices - <code>@vitacademics notices [course-number]</code></li>
+                <li>Help - <code>@vitacademics help</code></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.js"></script>
+<script type="text/javascript">
+var sub="init";
+var dat="init";
+var prog=$('#smsreply')
+  $('#submitbutton').on('click', function(e)
+  {
+    var txt=$('#sms').val();
+    console.log(txt);
+    prog.html('Sending SMS...');
+    $.get("/txtweb?txtweb-message="+encodeURIComponent(txt),
+        function(d) {
+            console.log(d)
+            prog.html(d);
+    });
+    e.preventDefault();
+
+  })
+</script>
 {% endblock %}
 {% block footer %}{% include "footer.html" %}{% endblock %}
